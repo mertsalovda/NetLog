@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/black"
     tools:context=".presentation.MainActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -24,10 +25,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                tools:text="@tools:sample/lorem/random"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@tools:sample/lorem/random" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

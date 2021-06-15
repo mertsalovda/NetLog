@@ -1,25 +1,37 @@
 package ru.mertsalovda.netlog.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ru.mertsalovda.netlog.R
-import ru.mertsalovda.netlog.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var tvText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        tvText = findViewById(R.id.tvText)
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.countries.observe(this, {
+            setTextInPreview(it.toString())
+        })
+    }
+
+    private fun setTextInPreview(text: String) {
+        tvText.text = text
     }
 
     fun openNetLog(view: View) {
