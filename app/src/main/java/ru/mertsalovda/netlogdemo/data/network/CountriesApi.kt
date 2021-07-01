@@ -1,12 +1,16 @@
-package ru.mertsalovda.netlog.data.network
+package ru.mertsalovda.netlogdemo.data.network
 
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.mertsalovda.netlog.BuildConfig
+import ru.mertsalovda.netlog.INetLogRepository
+import ru.mertsalovda.netlog.NetLogInterceptor
+import ru.mertsalovda.netlogdemo.App
+import ru.mertsalovda.netlogdemo.BuildConfig
 
 const val COUNTRIES_BASE_URL = "https://restcountries.eu/rest/v2/"
 
@@ -27,7 +31,7 @@ object CountriesApi {
     fun provideKotlinCoroutineAdapter() = coroutineCallAdapterFactory ?: CoroutineCallAdapterFactory()
         .apply { coroutineCallAdapterFactory = this }
 
-    fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
         return if (okHttpClient != null) {
             okHttpClient!!
         } else {
@@ -39,13 +43,17 @@ object CountriesApi {
         }
     }
 
+    private fun provideNetLogRepository(): INetLogRepository = App.netLogRepository
+
+    private fun provideNetLogInterceptor(repository: INetLogRepository) = NetLogInterceptor(repository)
+
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = httpLoggingInterceptor ?:
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY).apply { httpLoggingInterceptor = this }
 
     fun provideCountriesApi(): Api = api ?:
         Retrofit.Builder()
             .baseUrl(COUNTRIES_BASE_URL)
-            .client(provideOkHttpClient(provideHttpLoggingInterceptor()))
+            .client(provideOkHttpClient(provideNetLogInterceptor(provideNetLogRepository())))
             .addConverterFactory(provideGsonConverterFactory(provideGson()))
             .addCallAdapterFactory(provideKotlinCoroutineAdapter())
             .build()

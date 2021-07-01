@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog.presentation
+package ru.mertsalovda.netlogdemo.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import ru.mertsalovda.netlog.R
+import ru.mertsalovda.netlog.presentation.NetLogDialogFragment
+import ru.mertsalovda.netlogdemo.App
+import ru.mertsalovda.netlogdemo.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     fun openNetLog(view: View) {
         when (view.id) {
             R.id.btnRest -> viewModel.sendRest()
+            R.id.btnNetLog -> NetLogDialogFragment.newInstance(App.netLogRepository).show(supportFragmentManager, "NetLog")
         }
         Toast.makeText(this, "${(view as? Button)?.text}", Toast.LENGTH_SHORT).show()
     }

@@ -1,8 +1,8 @@
-package ru.mertsalovda.netlog.data.network
+package ru.mertsalovda.netlogdemo.data.network
 
 import retrofit2.Response
 import retrofit2.http.GET
-import ru.mertsalovda.netlog.domain.models.CountryDto
+import ru.mertsalovda.netlogdemo.domain.models.CountryDto
 
 interface Api {
 

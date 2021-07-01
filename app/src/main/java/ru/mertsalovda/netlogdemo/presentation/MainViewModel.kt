@@ -1,12 +1,12 @@
-package ru.mertsalovda.netlog.presentation
+package ru.mertsalovda.netlogdemo.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.mertsalovda.netlog.data.network.CountriesApi
-import ru.mertsalovda.netlog.domain.models.CountryDto
+import ru.mertsalovda.netlogdemo.data.network.CountriesApi
+import ru.mertsalovda.netlogdemo.domain.models.CountryDto
 
 class MainViewModel : ViewModel() {
 
