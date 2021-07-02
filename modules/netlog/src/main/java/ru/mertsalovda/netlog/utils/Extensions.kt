@@ -2,11 +2,14 @@ package ru.mertsalovda.netlog.utils
 
 import okhttp3.Request
 import okhttp3.Response
+import org.json.JSONArray
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 fun Date.format(mask: String): String {
-    val simpleDateFormat = SimpleDateFormat("HH:mm")
+    val simpleDateFormat = SimpleDateFormat(mask)
     return simpleDateFormat.format(this)
 }
 
@@ -29,7 +32,17 @@ fun Request.formatToString(): String {
     stringBuilder.append("-- Body --")
     stringBuilder.append("\n")
     stringBuilder.append("\n")
-    body?.let { stringBuilder.append(it.toString()) }
+    val bodyString = body?.toString() ?: ""
+    val formattedBody = try {
+        if (bodyString.isNotEmpty()) JSONObject(bodyString).toString(4) else body
+    } catch (e: Exception) {
+        if (bodyString.isNotEmpty()) JSONArray(bodyString).toString(4) else body
+    }
+    stringBuilder.append(formattedBody ?: "")
+    stringBuilder.append("\n")
+    stringBuilder.append("\n")
+    stringBuilder.append("\n")
+    stringBuilder.append("\n")
 
 
 
@@ -51,11 +64,16 @@ fun Response.formatToString(body: String): String {
         stringBuilder.append("\n")
         stringBuilder.append("\n")
     }
+    val formattedBody = try {
+        if (body.isNotEmpty()) JSONObject(body).toString(4) else body
+    } catch (e: Exception) {
+        if (body.isNotEmpty()) JSONArray(body).toString(4) else body
+    }
 
     stringBuilder.append("-- Body --")
     stringBuilder.append("\n")
     stringBuilder.append("\n")
-    stringBuilder.append(body)
+    stringBuilder.append(formattedBody)
     stringBuilder.append("\n")
     stringBuilder.append("\n")
     stringBuilder.append("\n")

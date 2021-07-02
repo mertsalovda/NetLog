@@ -42,7 +42,7 @@ class PlaceholderFragment : Fragment() {
         _binding = FragmentNetLogDetailPageBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val textView: TextView = binding.sectionLabel
+        val textView: TextView = binding.detailText
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
