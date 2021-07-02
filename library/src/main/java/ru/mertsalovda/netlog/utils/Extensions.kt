@@ -36,7 +36,11 @@ fun Request.formatToString(): String {
     val formattedBody = try {
         if (bodyString.isNotEmpty()) JSONObject(bodyString).toString(4) else body
     } catch (e: Exception) {
-        if (bodyString.isNotEmpty()) JSONArray(bodyString).toString(4) else body
+        try {
+            if (bodyString.isNotEmpty()) JSONArray(bodyString).toString(4) else body
+        } catch (e: Exception) {
+            ""
+        }
     }
     stringBuilder.append(formattedBody ?: "")
     stringBuilder.append("\n")
@@ -67,7 +71,11 @@ fun Response.formatToString(body: String): String {
     val formattedBody = try {
         if (body.isNotEmpty()) JSONObject(body).toString(4) else body
     } catch (e: Exception) {
-        if (body.isNotEmpty()) JSONArray(body).toString(4) else body
+        try {
+            if (body.isNotEmpty()) JSONArray(body).toString(4) else body
+        } catch (e: Exception) {
+            ""
+        }
     }
 
     stringBuilder.append("-- Body --")
@@ -78,8 +86,6 @@ fun Response.formatToString(body: String): String {
     stringBuilder.append("\n")
     stringBuilder.append("\n")
     stringBuilder.append("\n")
-
-
 
     return stringBuilder.toString()
 }
