@@ -12,9 +12,6 @@ import ru.mertsalovda.netlog.INetLogRepository
 import ru.mertsalovda.netlog.databinding.FragmentNetlogDialogListDialogBinding
 import ru.mertsalovda.netlog.presentation.adapter.ItemAdapter
 
-// TODO: Customize parameter argument names
-const val ARG_ITEM_COUNT = "item_count"
-
 /**
  *
  * A fragment that shows a list of items as a modal bottom sheet.
@@ -26,8 +23,14 @@ const val ARG_ITEM_COUNT = "item_count"
  */
 class NetLogDialogFragment : BottomSheetDialogFragment() {
 
-    private var itemAdapter: ItemAdapter = ItemAdapter()
-    private lateinit var repository: INetLogRepository
+    private var itemAdapter: ItemAdapter = ItemAdapter { item ->
+        childFragmentManager.beginTransaction()
+            .add(NetLogDetailFragment.newInstance(item), "NetLogDetailFragment")
+            .addToBackStack("NetLogDetailFragment")
+            .commit()
+    }
+
+    private var repository: INetLogRepository? = null
 
     private var _binding: FragmentNetlogDialogListDialogBinding? = null
 
@@ -49,14 +52,17 @@ class NetLogDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.adapter = itemAdapter
-        itemAdapter.setData(viewLifecycleOwner.lifecycleScope, repository.getItems().getValue())
+        if (repository == null) {
+            dismiss()
+        }
+        itemAdapter.setData(viewLifecycleOwner.lifecycleScope, repository?.getItems()?.getValue() ?: mutableListOf())
 
-        repository.getItems().subscribe(this) { items ->
+        repository?.getItems()?.subscribe(this) { items ->
             itemAdapter.setData(viewLifecycleOwner.lifecycleScope, items)
         }
 
         binding.clearBtn.setOnClickListener {
-            repository.clear()
+            repository?.clear()
         }
     }
 
@@ -72,7 +78,7 @@ class NetLogDialogFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repository.getItems().unsubscribe(this)
+        repository?.getItems()?.unsubscribe(this)
         _binding = null
     }
 }

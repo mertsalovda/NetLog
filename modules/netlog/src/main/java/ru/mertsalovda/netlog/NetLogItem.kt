@@ -6,4 +6,5 @@ import okhttp3.Response
 data class NetLogItem(
     val request: Request,
     val response: Response,
+    val body: String
     )

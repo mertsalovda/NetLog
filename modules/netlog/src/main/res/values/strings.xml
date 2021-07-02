@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hint_search">Search</string>
+    <string name="title_activity_net_log_detail_fragment">NetLogDetailFragment</string>
+    <string name="tab_text_request">Request</string>
+    <string name="tab_text_response">Response</string>
 </resources>
