@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/text"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
@@ -10,11 +10,11 @@
     tools:text="Hello">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/codeColor"
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginBottom="1dp"
-        android:background="@android:color/holo_green_light"
+        tools:background="@android:color/holo_green_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="15:14"
+            tools:text="15:14"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@id/delay"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="3.48"
+            tools:text="3.48"
             android:textColor="#323232"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,9 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="https://square.github.io/okhttp/"
+        tools:text="https://square.github.io/okhttp/"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/constraintLayout"
+        app:layout_constraintStart_toEndOf="@id/codeColor"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -63,9 +63,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="GET"
+        tools:text="GET"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/constraintLayout"
+        app:layout_constraintStart_toEndOf="@id/codeColor"
         app:layout_constraintTop_toBottomOf="@id/url" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -73,7 +73,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="image/gif"
+        tools:text="image/gif"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/method"
         app:layout_constraintEnd_toEndOf="parent"

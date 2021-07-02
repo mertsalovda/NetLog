@@ -9,10 +9,14 @@ class NetLogRepositoryImpl : INetLogRepository {
 
     override fun addItem(item: NetLogItem) {
         val list = items.getValue()
-        list.add(item)
+        list.add(0, item)
         items.setValue(list)
     }
 
     override fun getItems(): ObservableList<MutableList<NetLogItem>> = items
+
+    override fun clear() {
+        items.setValue(mutableListOf())
+    }
 
 }

@@ -41,6 +41,5 @@ class MainActivity : AppCompatActivity() {
             R.id.btnRest -> viewModel.sendRest()
             R.id.btnNetLog -> NetLogDialogFragment.newInstance(App.netLogRepository).show(supportFragmentManager, "NetLog")
         }
-        Toast.makeText(this, "${(view as? Button)?.text}", Toast.LENGTH_SHORT).show()
     }
 }

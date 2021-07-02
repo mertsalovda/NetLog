@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import ru.mertsalovda.netlog.INetLogRepository
-import ru.mertsalovda.netlog.R
 import ru.mertsalovda.netlog.databinding.FragmentNetlogDialogListDialogBinding
 import ru.mertsalovda.netlog.presentation.adapter.ItemAdapter
 
@@ -50,10 +49,14 @@ class NetLogDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.adapter = itemAdapter
-        itemAdapter.setData(repository.getItems().getValue())
+        itemAdapter.setData(viewLifecycleOwner.lifecycleScope, repository.getItems().getValue())
 
         repository.getItems().subscribe(this) { items ->
-//            itemAdapter.setData(items)
+            itemAdapter.setData(viewLifecycleOwner.lifecycleScope, items)
+        }
+
+        binding.clearBtn.setOnClickListener {
+            repository.clear()
         }
     }
 
