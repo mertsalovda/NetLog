@@ -1,3 +1,3 @@
 rootProject.name = "NetLog"
-include ':app'
-include ':app:netlog'
+include ':sample'
+include ':library'
