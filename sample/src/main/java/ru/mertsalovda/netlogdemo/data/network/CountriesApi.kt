@@ -7,8 +7,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.mertsalovda.netlog.INetLogRepository
-import ru.mertsalovda.netlog.NetLogInterceptor
+import ru.mertsalovda.netlog.interceptor.INetLogRepository
+import ru.mertsalovda.netlog.interceptor.NetLogInterceptor
 import ru.mertsalovda.netlogdemo.App
 import ru.mertsalovda.netlogdemo.BuildConfig
 

@@ -1,13 +1,12 @@
-package ru.mertsalovda.netlog.presentation
+package ru.mertsalovda.netlog.presentation.ui.detail
 
 import android.os.Bundle
 import android.view.*
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import ru.mertsalovda.netlog.NetLogItem
+import ru.mertsalovda.netlog.interceptor.NetLogItem
 import ru.mertsalovda.netlog.databinding.FragmentNetLogDetailBinding
-import ru.mertsalovda.netlog.presentation.ui.main.SectionsPagerAdapter
 
 class NetLogDetailFragment : BottomSheetDialogFragment() {
 

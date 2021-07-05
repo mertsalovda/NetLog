@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog.presentation
+package ru.mertsalovda.netlog.presentation.ui.dialog
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,9 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import ru.mertsalovda.netlog.INetLogRepository
+import ru.mertsalovda.netlog.interceptor.INetLogRepository
 import ru.mertsalovda.netlog.databinding.FragmentNetlogDialogListDialogBinding
-import ru.mertsalovda.netlog.presentation.adapter.ItemAdapter
+import ru.mertsalovda.netlog.presentation.ui.dialog.adapter.ItemAdapter
+import ru.mertsalovda.netlog.presentation.ui.detail.NetLogDetailFragment
 
 /**
  *

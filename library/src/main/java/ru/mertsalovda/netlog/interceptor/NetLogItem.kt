@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog
+package ru.mertsalovda.netlog.interceptor
 
 import okhttp3.Request
 import okhttp3.Response

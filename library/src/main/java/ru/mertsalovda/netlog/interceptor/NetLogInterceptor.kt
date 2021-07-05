@@ -1,11 +1,10 @@
-package ru.mertsalovda.netlog
+package ru.mertsalovda.netlog.interceptor
 
 import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Response
 import okhttp3.ResponseBody
-import okhttp3.ResponseBody.Companion.toResponseBody
 
 
 private const val TAG = "Netlog"
@@ -16,9 +15,9 @@ open class NetLogInterceptor(private val netLogRepository: INetLogRepository) : 
         val request = chain.request()
         val response = chain.proceed(request)
 
-        val contentType: MediaType? = response.body!!.contentType()
-        val bodyString = response.body?.string() ?: ""
-        val body: ResponseBody = bodyString.toResponseBody(contentType)
+        val contentType: MediaType? = response.body()!!.contentType()
+        val bodyString = response.body()?.string() ?: ""
+        val body: ResponseBody = ResponseBody.create(contentType, bodyString)
 
             val responseForSaving = response.newBuilder()
                 .body(body)
@@ -27,7 +26,7 @@ open class NetLogInterceptor(private val netLogRepository: INetLogRepository) : 
 
             netLogRepository.addItem(NetLogItem(request, responseForSaving, bodyString))
 
-        Log.d(TAG, request.url.toString())
+        Log.d(TAG, request.url().toString())
 
         return response.newBuilder().body(body).build()
     }

@@ -1,10 +1,10 @@
-package ru.mertsalovda.netlog.presentation.ui.main
+package ru.mertsalovda.netlog.presentation.ui.detail
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import ru.mertsalovda.netlog.NetLogItem
+import ru.mertsalovda.netlog.interceptor.NetLogItem
 import ru.mertsalovda.netlog.R
 
 private val TAB_TITLES = arrayOf(

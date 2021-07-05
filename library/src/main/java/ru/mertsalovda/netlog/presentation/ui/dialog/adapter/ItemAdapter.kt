@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog.presentation.adapter
+package ru.mertsalovda.netlog.presentation.ui.dialog.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.mertsalovda.netlog.NetLogItem
+import ru.mertsalovda.netlog.interceptor.NetLogItem
 import ru.mertsalovda.netlog.databinding.FragmentNetlogDialogListDialogItemBinding
 import ru.mertsalovda.netlog.utils.format
 import java.util.*
@@ -27,7 +27,7 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(items[position], onItemClick)
+        items[position]?.let { holder.bind(it, onItemClick) }
     }
 
     override fun getItemCount(): Int = items.size
@@ -72,17 +72,17 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
                 onItemClick?.invoke(item)
             }
 
-            binding.url.text = item.request.url.toString()
-            binding.method.text = item.request.method
-            binding.type.text = item.response.headers["content-Type"]
-            setCodeColor(item.response.code)
-            setTimestamp(item.response.receivedResponseAtMillis)
+            binding.url.text = item.request.url().toString()
+            binding.method.text = item.request.method()
+            binding.type.text = item.response.headers()["content-Type"]
+            setCodeColor(item.response.code())
+            setTimestamp(item.response.receivedResponseAtMillis())
             setDelayBetweenRequestAndResponse(item)
         }
 
         private fun setDelayBetweenRequestAndResponse(item: NetLogItem) {
-            val sendTime = item.response.sentRequestAtMillis
-            val receivedTime = item.response.receivedResponseAtMillis
+            val sendTime = item.response.sentRequestAtMillis()
+            val receivedTime = item.response.receivedResponseAtMillis()
             val differTime = (receivedTime - sendTime).toFloat() / 1000f
             binding.delay.text = String.format("%.2f", differTime)
 

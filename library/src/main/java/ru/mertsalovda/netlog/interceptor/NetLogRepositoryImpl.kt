@@ -1,8 +1,4 @@
-package ru.mertsalovda.netlogdemo
-
-import ru.mertsalovda.netlog.INetLogRepository
-import ru.mertsalovda.netlog.NetLogItem
-import ru.mertsalovda.netlog.ObservableList
+package ru.mertsalovda.netlog.interceptor
 
 class NetLogRepositoryImpl : INetLogRepository {
     private val items = ObservableList(mutableListOf<NetLogItem>())

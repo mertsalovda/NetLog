@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog
+package ru.mertsalovda.netlog.interceptor
 
 class ObservableList<T>(initialValue: T) {
 

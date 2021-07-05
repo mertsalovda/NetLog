@@ -16,7 +16,7 @@ fun Date.format(mask: String): String {
 fun Request.formatToString(): String {
     val stringBuilder = StringBuilder()
 
-    val headerMap = this.headers.toMultimap()
+    val headerMap = this.headers().toMultimap()
 
     stringBuilder.append("-- Headers --")
     stringBuilder.append("\n")
@@ -32,12 +32,12 @@ fun Request.formatToString(): String {
     stringBuilder.append("-- Body --")
     stringBuilder.append("\n")
     stringBuilder.append("\n")
-    val bodyString = body?.toString() ?: ""
+    val bodyString = body()?.toString() ?: ""
     val formattedBody = try {
-        if (bodyString.isNotEmpty()) JSONObject(bodyString).toString(4) else body
+        if (bodyString.isNotEmpty()) JSONObject(bodyString).toString(4) else body()
     } catch (e: Exception) {
         try {
-            if (bodyString.isNotEmpty()) JSONArray(bodyString).toString(4) else body
+            if (bodyString.isNotEmpty()) JSONArray(bodyString).toString(4) else body()
         } catch (e: Exception) {
             ""
         }
@@ -56,7 +56,7 @@ fun Request.formatToString(): String {
 fun Response.formatToString(body: String): String {
     val stringBuilder = StringBuilder()
 
-    val headerMap = this.headers.toMultimap()
+    val headerMap = this.headers().toMultimap()
 
     stringBuilder.append("-- Headers --")
     stringBuilder.append("\n")

@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog
+package ru.mertsalovda.netlog.interceptor
 
 interface INetLogRepository {
     fun addItem(item: NetLogItem)

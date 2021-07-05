@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog.presentation.ui.main
+package ru.mertsalovda.netlog.presentation.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

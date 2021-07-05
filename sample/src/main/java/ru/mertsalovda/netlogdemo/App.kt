@@ -1,7 +1,8 @@
 package ru.mertsalovda.netlogdemo
 
 import android.app.Application
-import ru.mertsalovda.netlog.INetLogRepository
+import ru.mertsalovda.netlog.interceptor.INetLogRepository
+import ru.mertsalovda.netlog.interceptor.NetLogRepositoryImpl
 
 class App : Application() {
 

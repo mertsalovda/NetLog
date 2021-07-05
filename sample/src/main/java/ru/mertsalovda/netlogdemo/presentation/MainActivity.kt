@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import ru.mertsalovda.netlog.presentation.NetLogDialogFragment
+import ru.mertsalovda.netlog.presentation.ui.dialog.NetLogDialogFragment
 import ru.mertsalovda.netlogdemo.App
 import ru.mertsalovda.netlogdemo.R
 

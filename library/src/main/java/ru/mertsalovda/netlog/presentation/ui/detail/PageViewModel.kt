@@ -1,4 +1,4 @@
-package ru.mertsalovda.netlog.presentation.ui.main
+package ru.mertsalovda.netlog.presentation.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
