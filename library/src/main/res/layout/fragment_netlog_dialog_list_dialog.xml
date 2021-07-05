@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchContainer"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/NetLogSearchTextViewLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -22,6 +23,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search"
+            style="@style/NetLogSearchTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,8 +33,9 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
-        android:src="@android:drawable/ic_menu_delete"
-        app:layout_constraintBottom_toBottomOf="@+id/searchContainer"
+        android:src="@drawable/ic_baseline_delete_forever"
+        android:background="@drawable/background_button_oval_ripple"
+        app:layout_constraintBottom_toBottomOf="@id/searchContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchContainer" />
 

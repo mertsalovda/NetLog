@@ -5,46 +5,44 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-    tools:text="Hello">
+    android:background="@drawable/background_button_rectangle_ripple"
+    android:textAppearance="@style/TextAppearance.AppCompat.Large">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/codeColor"
         android:layout_width="58dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="1dp"
-        tools:background="@android:color/holo_green_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@android:color/holo_green_light">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/timestamp"
+            style="@style/NetLogTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:text="15:14"
-            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@id/delay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="15:14" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/delay"
+            style="@style/NetLogTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:text="3.48"
-            android:textColor="#323232"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timestamp" />
+            app:layout_constraintTop_toBottomOf="@id/timestamp"
+            tools:text="3.48" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textview.MaterialTextView
@@ -53,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        style="@style/NetLogTextStyle"
         tools:text="https://square.github.io/okhttp/"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/codeColor"
@@ -63,6 +62,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        style="@style/NetLogTextStyle"
         tools:text="GET"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/codeColor"
@@ -73,10 +74,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        style="@style/NetLogTextStyle"
         tools:text="image/gif"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/method"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/method"
         app:layout_constraintTop_toTopOf="@id/method" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
