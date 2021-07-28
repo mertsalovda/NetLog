@@ -50,6 +50,6 @@
         android:paddingBottom="128dp"
         app:layout_constraintTop_toBottomOf="@+id/searchContainer"
         tools:context=".presentation.ui.dialog.NetLogDialogFragment"
-        tools:listitem="@layout/fragment_netlog_dialog_list_dialog_item" />
+        tools:listitem="@layout/item_netlog" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

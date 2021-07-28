@@ -66,7 +66,7 @@ class NetLogDialogFragment : BottomSheetDialogFragment() {
 
             override fun afterTextChanged(editable: Editable?) {
                 editable?.let {
-                    viewModel.setSearchQuery(it.toString())
+                    viewModel.setSearchQuery(it.toString().trim())
                 }
             }
         })

@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.mertsalovda.netlog.model.NetLogItem
-import ru.mertsalovda.netlog.databinding.FragmentNetlogDialogListDialogItemBinding
+import ru.mertsalovda.netlog.databinding.ItemNetlogBinding
 import ru.mertsalovda.netlog.utils.format
 import java.util.*
 
@@ -16,7 +16,7 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
     private val items = mutableListOf<NetLogItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = FragmentNetlogDialogListDialogItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemNetlogBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
 
     }
@@ -50,7 +50,7 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
     }
 
     class ItemViewHolder(
-        private val binding: FragmentNetlogDialogListDialogItemBinding
+        private val binding: ItemNetlogBinding
         ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: NetLogItem, onItemClick: ((NetLogItem) -> Unit)?) {
