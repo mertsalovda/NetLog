@@ -10,8 +10,16 @@ interface Api {
     suspend fun getAllCountries() : Response<List<CountryDto>>
 
     @Headers("JSESSION: DKJH1564365416DFK", "ANY: PARAMS")
-    @POST("all?fields=name;flag;currencies")
+    @POST("ping")
     suspend fun postAllCountries(@Body body: String = "{\"text\":\"string\"}") : Response<List<CountryDto>>
+
+    @Headers("JSESSION: DKJH1564365416DFK", "ANY: PARAMS")
+    @POST("login")
+    suspend fun postLogin(@Body body: String = "{\"text\":\"string\"}") : Response<List<CountryDto>>
+
+    @Headers("JSESSION: DKJH1564365416DFK", "ANY: PARAMS")
+    @POST("loginping")
+    suspend fun postLoginPing(@Body body: String = "{\"text\":\"string\"}") : Response<List<CountryDto>>
 
     @Headers("JSESSION: DKJH1564365416DFK", "ANY: PARAMS")
     @GET("all?fields=flag")
