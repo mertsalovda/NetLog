@@ -28,7 +28,7 @@ class SectionsPagerAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             REQUEST_POSITION -> PlaceholderFragment.newInstance(item.request, null)
-            RESPONSE_POSITION -> PlaceholderFragment.newInstance(null, item.response, item.body)
+            RESPONSE_POSITION -> PlaceholderFragment.newInstance(null, item.response, item.responseBody)
             else -> throw IndexOutOfBoundsException("Position failure")
         }
     }
