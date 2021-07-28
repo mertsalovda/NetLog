@@ -12,29 +12,15 @@ import ru.mertsalovda.netlogdemo.R
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var tvText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        tvText = findViewById(R.id.tvText)
-        initObservers()
     }
 
-    private fun initObservers() {
-        viewModel.countries.observe(this, {
-            setTextInPreview(it.toString())
-        })
-    }
-
-    private fun setTextInPreview(text: String) {
-        tvText.text = text
-    }
-
-    fun openNetLog(view: View) {
+    fun click(view: View) {
         when (view.id) {
             R.id.btnRest -> viewModel.sendRest()
             R.id.btnNetLog -> NetLogDialogFragment.newInstance(App.netLogRepository).show(supportFragmentManager, "NetLog")

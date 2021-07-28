@@ -1,7 +1,5 @@
 package ru.mertsalovda.netlogdemo.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
@@ -12,15 +10,18 @@ import ru.mertsalovda.netlogdemo.domain.models.CountryDto
 
 class MainViewModel : ViewModel() {
 
-    private val _countries = MutableLiveData<List<CountryDto>>()
-    val countries: LiveData<List<CountryDto>> = _countries
-
     private val testRestList = listOf<suspend () -> Response<List<CountryDto>>>(
         {
             CountriesApi.provideCountriesApi().getAllCountries()
         },
         {
             CountriesApi.provideCountriesApi().postAllCountries()
+        },
+        {
+            CountriesApi.provideCountriesApi().postLogin()
+        },
+        {
+            CountriesApi.provideCountriesApi().postLoginPing()
         },
         {
             CountriesApi.provideCountriesApi().getAllFlags()
@@ -31,12 +32,10 @@ class MainViewModel : ViewModel() {
     )
 
     fun sendRest() {
-        _countries.value = listOf()
         viewModelScope.launch {
             try {
                 delay(2000)
-                val allCountries = testRestList.random().invoke()
-                _countries.value = allCountries.body()
+                testRestList.random().invoke()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
