@@ -54,3 +54,8 @@ Step 5. Create an instance of a `NetLogDialogFragment` and pass it a link to the
 ```kotlin
     NetLogDialogFragment.newInstance(App.netLogRepository).show(supportFragmentManager, "NetLog")
 ```
+<p>
+  <a target="_blank" rel="noopener noreferrer" href="https://github.com/mertsalovda/NetLog/blob/master/preview.gif">
+    <img src="https://github.com/mertsalovda/NetLog/blob/master/preview.gif" alt="" style="max-width:100%;">
+  </a>
+</p>
