@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import ru.mertsalovda.netlog.interceptor.NetLogItem
+import ru.mertsalovda.netlog.model.NetLogItem
 import ru.mertsalovda.netlog.R
 
 private val TAB_TITLES = arrayOf(
@@ -15,10 +15,6 @@ private val TAB_TITLES = arrayOf(
 private const val REQUEST_POSITION = 0
 private const val RESPONSE_POSITION = 1
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 class SectionsPagerAdapter(
     private val context: Context,
     private val item: NetLogItem,
@@ -28,7 +24,7 @@ class SectionsPagerAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             REQUEST_POSITION -> PlaceholderFragment.newInstance(item.request, null)
-            RESPONSE_POSITION -> PlaceholderFragment.newInstance(null, item.response, item.body)
+            RESPONSE_POSITION -> PlaceholderFragment.newInstance(null, item.response, item.responseBody)
             else -> throw IndexOutOfBoundsException("Position failure")
         }
     }

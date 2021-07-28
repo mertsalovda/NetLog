@@ -3,17 +3,12 @@ package ru.mertsalovda.netlog.presentation.ui.dialog.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import ru.mertsalovda.netlog.interceptor.NetLogItem
-import ru.mertsalovda.netlog.databinding.FragmentNetlogDialogListDialogItemBinding
+import ru.mertsalovda.netlog.model.NetLogItem
+import ru.mertsalovda.netlog.databinding.ItemNetlogBinding
 import ru.mertsalovda.netlog.utils.format
 import java.util.*
-import kotlin.coroutines.CoroutineContext
 
 
 class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
@@ -21,49 +16,41 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
     private val items = mutableListOf<NetLogItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = FragmentNetlogDialogListDialogItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemNetlogBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
 
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        items[position]?.let { holder.bind(it, onItemClick) }
+        holder.bind(items[position], onItemClick)
     }
 
     override fun getItemCount(): Int = items.size
 
-    fun setData(scope: LifecycleCoroutineScope, data: MutableList<NetLogItem>) {
-        scope.launch(Dispatchers.Main) {
-            notifyChanges(this.coroutineContext, data)
-        }
-    }
+    fun setData(data: MutableList<NetLogItem>) {
+        val diffUtilCallback = object : DiffUtil.Callback() {
+            override fun getOldListSize(): Int = items.size
 
-    private suspend fun notifyChanges(coroutineContext: CoroutineContext, data: MutableList<NetLogItem>) {
-        withContext(coroutineContext) {
-            val diffUtilCallback = object : DiffUtil.Callback() {
-                override fun getOldListSize(): Int = items.size
+            override fun getNewListSize(): Int = data.size
 
-                override fun getNewListSize(): Int = data.size
-
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return items[oldItemPosition] === data[newItemPosition]
-                }
-
-                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return items[oldItemPosition] == data[newItemPosition]
-                }
-
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return items[oldItemPosition] === data[newItemPosition]
             }
 
-            val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-            items.clear()
-            items.addAll(data)
-            diffResult.dispatchUpdatesTo(this@ItemAdapter)
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return items[oldItemPosition] == data[newItemPosition]
+            }
+
         }
+
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
+        items.clear()
+        items.addAll(data)
+        diffResult.dispatchUpdatesTo(this@ItemAdapter)
     }
 
     class ItemViewHolder(
-        private val binding: FragmentNetlogDialogListDialogItemBinding
+        private val binding: ItemNetlogBinding
         ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: NetLogItem, onItemClick: ((NetLogItem) -> Unit)?) {
@@ -84,8 +71,7 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
             val sendTime = item.response.sentRequestAtMillis()
             val receivedTime = item.response.receivedResponseAtMillis()
             val differTime = (receivedTime - sendTime).toFloat() / 1000f
-            binding.delay.text = String.format("%.2f", differTime)
-
+            binding.delay.text = String.format("%.2f", differTime) + " s"
         }
 
         private fun setTimestamp(millis: Long) {
