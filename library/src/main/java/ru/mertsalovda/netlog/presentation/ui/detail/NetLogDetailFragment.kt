@@ -5,7 +5,7 @@ import android.view.*
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import ru.mertsalovda.netlog.interceptor.NetLogItem
+import ru.mertsalovda.netlog.model.NetLogItem
 import ru.mertsalovda.netlog.databinding.FragmentNetLogDetailBinding
 
 class NetLogDetailFragment : BottomSheetDialogFragment() {

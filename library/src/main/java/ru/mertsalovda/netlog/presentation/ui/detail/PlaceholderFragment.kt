@@ -12,9 +12,6 @@ import okhttp3.Request
 import okhttp3.Response
 import ru.mertsalovda.netlog.databinding.FragmentNetLogDetailPageBinding
 
-/**
- * A placeholder fragment containing a simple view.
- */
 class PlaceholderFragment : Fragment() {
 
     private var response: Response? = null
