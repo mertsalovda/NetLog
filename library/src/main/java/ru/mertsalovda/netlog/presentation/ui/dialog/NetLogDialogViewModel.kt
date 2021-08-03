@@ -40,7 +40,7 @@ class NetLogDialogViewModel(
         searchQueryList: List<String>,
         ignoreList: List<String>
     ): Boolean {
-        val url = netLogItem.request.url().toString()
+        val url = netLogItem.request?.url()?.toString() ?: ""
         val containsInSearch = url.contains(getRegex(searchQueryList)) || searchQueryList.isEmpty()
         val notContainsInIgnore = !url.contains(getRegex(ignoreList)) || ignoreList.isEmpty()
         return containsInSearch && notContainsInIgnore
