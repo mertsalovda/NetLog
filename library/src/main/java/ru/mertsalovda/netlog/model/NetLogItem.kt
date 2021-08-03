@@ -7,7 +7,7 @@ import okhttp3.Response
  * Network log view
  */
 data class NetLogItem(
-    val request: Request,
-    val response: Response,
+    val request: Request?,
+    val response: Response?,
     val responseBody: String
     )

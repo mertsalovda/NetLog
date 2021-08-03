@@ -15,15 +15,19 @@
         android:hint="@string/hint_search"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:endIconDrawable="@android:drawable/ic_menu_close_clear_cancel"
+        app:endIconDrawable="@drawable/ic_baseline_clear_24"
         app:endIconMode="clear_text"
-        app:layout_constraintEnd_toStartOf="@+id/clearBtn"
+        app:endIconTint="@android:color/black"
+        app:layout_constraintEnd_toStartOf="@id/clearBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search"
             style="@style/NetLogSearchTextView"
+            android:maxLines="1"
+            android:inputType="textImeMultiLine"
+            android:imeOptions="actionDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
