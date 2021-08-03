@@ -59,17 +59,17 @@ class ItemAdapter(private val onItemClick: ((NetLogItem) -> Unit)? = null) : Rec
                 onItemClick?.invoke(item)
             }
 
-            binding.url.text = item.request.url().toString()
-            binding.method.text = item.request.method()
-            binding.type.text = item.response.headers()["content-Type"]
-            setCodeColor(item.response.code())
-            setTimestamp(item.response.receivedResponseAtMillis())
+            binding.url.text = item.request?.url()?.toString()
+            binding.method.text = item.request?.method()
+            binding.type.text = item.response?.headers()?.get("content-Type")
+            item.response?.let { setCodeColor(it.code()) }
+            item.response?.let { setTimestamp(it.receivedResponseAtMillis()) }
             setDelayBetweenRequestAndResponse(item)
         }
 
         private fun setDelayBetweenRequestAndResponse(item: NetLogItem) {
-            val sendTime = item.response.sentRequestAtMillis()
-            val receivedTime = item.response.receivedResponseAtMillis()
+            val sendTime = item.response?.sentRequestAtMillis() ?: 0
+            val receivedTime = item.response?.receivedResponseAtMillis() ?: 0
             val differTime = (receivedTime - sendTime).toFloat() / 1000f
             binding.delay.text = String.format("%.2f", differTime) + " s"
         }
