@@ -1,25 +1,6 @@
 # NetLog
 
-Library for displaying logs of network requests.
-
-Step 1. Add the JitPack repository to your build file
-
-Add it in your root build.gradle at the end of repositories:
-```groovy
-	allprojects {
-		repositories {
-			maven { url 'https://jitpack.io' }
-		}
-	}
-```
-Step 2. Add the dependency
-```groovy
-	dependencies {
-	        implementation 'com.github.mertsalovda:NetLog:1.0.1-beta'
-	}
-```
-
-Step 3. Create a singleton repository instance. Example:
+Create a singleton repository instance. Example:
 
 ```kotlin
 import android.app.Application
@@ -39,7 +20,7 @@ class App : Application() {
 }
 ```
 
-Step 4. Create and add an interceptor to your OkHttpClient
+Create and add an interceptor to your OkHttpClient
 
 ```kotlin
    fun provideOkHttpClient(): OkHttpClient {
@@ -49,7 +30,7 @@ Step 4. Create and add an interceptor to your OkHttpClient
     }
 ```
 
-Step 5. Create an instance of a `NetLogDialogFragment` and pass it a link to the repository with logs. Call the `show` method.
+Create an instance of a `NetLogDialogFragment` and pass it a link to the repository with logs. Call the `show` method.
 
 ```kotlin
     NetLogDialogFragment.newInstance(App.netLogRepository).show(supportFragmentManager, "NetLog")
